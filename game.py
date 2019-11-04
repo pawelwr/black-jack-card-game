@@ -40,7 +40,7 @@ def game():
             while True:
                 print(user.count_points())
                 print("\n" * get_terminal_size().lines, end='')
-                ui.game_status(user, dealer, dealer_cards_visibility) # TODO double possibility only after first dealing
+                ui.game_status(user, dealer, dealer_cards_visibility)
                 if user.count_points() > 20: break
                 ui.ask_about_user_decision()
                 user_input = input()
