@@ -71,11 +71,6 @@ class User(Player):
             self.add_card(card)
             self.bet *= 2
 
-
-    def double_bet(self):
-        self
-
-
     def save_user(self):
         pass
 
@@ -104,8 +99,6 @@ class User(Player):
 # print(u.cash)
 
 class Dealer(Player):
-
-    def dealer_turn(self):
-        pass
-
-    pass
+    def dealer_turn(self, card):
+        while self.count_points() < 17:
+            self.add_card(card)
