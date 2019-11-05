@@ -50,20 +50,21 @@ def game():
 
             print("\n" * get_terminal_size().lines, end='')
 
-            # if points <= 21:
-            #     dealer turn
-            # show result
-            # compare points
-            # if user won transfer bet to his account
+            if user.count_points() > 21:
+                ui.bust()
+                continue
 
-            # print("dealer turn")
-
-
-                # # check points
-                    #if points > 20
-            #dealer turn
-            # ? #checking points
-                    #update account
+            dealer.dealer_turn(deck.get_card())
+            dealer_cards_visibility = True
+            ui.game_status(user, dealer, dealer_cards_visibility)
+            if user.count_points() == dealer.count_points():
+                ui.draw()
+                user.cash += user.bet
+            elif user.count_points() > dealer.count_points():
+                ui.won_hand()
+                user.cash += user.bet*2
+            else:
+                ui.lost_hand()
 
 
 def first_dealing(user, dealer, deck):
