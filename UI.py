@@ -1,5 +1,4 @@
-
-#import player.players
+#TODO resize message format to console size
 
 def welcome():
     print("Welcome to Black Jack game.\nEnter your username to play: ", sep = "")
@@ -15,9 +14,9 @@ def incorrect_bet():
     print("Please type correct value of bet.\n(Numeric value which is lower than account balance.)")
 
 def place_bet(cash):
-    print("##############################")
-    print("# Account status: {:<11}#".format(cash))
-    print("##############################")
+    print("###################################")
+    print("# Account status: {:<16}#".format(cash))
+    print("###################################")
     print("Please place your bet: ", sep="")
 
 
