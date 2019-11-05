@@ -54,3 +54,24 @@ def ask_about_user_decision_with_double(): # TODO double possibility only after 
 
 def ask_about_user_decision(): # TODO double possibility only after first dealing
     print("Want to (h)it or (s)tay?: ", sep = "")
+
+def bust():
+    print("###################################")
+    print("#             You bust!           #")
+    print("###################################")
+
+def won_hand():
+    print("###################################")
+    print("#             You won!            #")
+    print("###################################")
+
+def lost_hand():
+    print("###################################")
+    print("#             You lost!           #")
+    print("###################################")
+
+def draw():
+    print("###################################")
+    print("#               Draw!             #")
+    print("#    You get your money back.     #")
+    print("###################################")
