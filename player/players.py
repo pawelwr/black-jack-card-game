@@ -52,9 +52,7 @@ class User(Player):
         self.bet = 0
         Player.__init__(self)
 
-    def place_bet(self, cash):
-        # check that bet is bigger than account_status
-        bet = input()
+    def place_bet(self, cash, bet):
         if not bet.isnumeric():
             return False
         elif int(bet) > cash:

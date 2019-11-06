@@ -25,7 +25,8 @@ def game():
         while len(deck.deck) > 10 or user_decision != "n" or user.cash <= 0:
             dealer_cards_visibility = False
             ui.place_bet(user.get_cash())
-            is_bet_correct = user.place_bet(user.get_cash())
+            bet = input()
+            is_bet_correct = user.place_bet(user.get_cash(), bet)
             while not is_bet_correct:
                 ui.incorrect_bet()
                 is_bet_correct = user.place_bet(user.get_cash())
@@ -59,11 +60,15 @@ def game():
             if user.count_points() == dealer.count_points():
                 ui.draw()
                 user.cash += user.bet
-            elif user.count_points() > dealer.count_points():
+            elif user.count_points() > dealer.count_points() and dealer.count_points <= 21:
                 ui.won_hand()
                 user.cash += user.bet*2
             else:
                 ui.lost_hand()
+            if user.get_cash() == 0:
+                print('You are out of cash. If you want to play again press Enter. If you want to quit press "q"')
+                user_input = input()
+                if user_input == "q": quit()
 
 def first_dealing(user, dealer, deck):
     for i in range(2):
