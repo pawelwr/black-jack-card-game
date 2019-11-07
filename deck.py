@@ -22,7 +22,3 @@ class Deck:
         #giving card for player and removing from desk
         card = self.deck.pop(0)
         return card
-"""
-d = Deck()
-print(d.deck)
-"""
