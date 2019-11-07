@@ -22,9 +22,6 @@ class Player(object):
     def clear_hand(self):
         self.hand = []
 
-    def stand(self):
-        pass
-
     def count_points(self): #TODO BY GET FUNCTION ?????
         points = 0
         for c in sorted(self.hand):
@@ -39,9 +36,6 @@ class Player(object):
 
     def compare_points(self): #TODO with gt> function
         pass
-
-# p = Player()
-# print(p.count_points())
 
 class User(Player):
     def __init__(self, name, cash = 5000, played_hand = 0, won_hand = 0):
@@ -91,10 +85,6 @@ class User(Player):
             user = User(username)
             return user
 
-# u = User("paw")
-# print(u.cash)
-# u.place_bet(500)
-# print(u.cash)
 
 class Dealer(Player):
     def dealer_turn(self, card):

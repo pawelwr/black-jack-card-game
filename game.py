@@ -1,4 +1,3 @@
-# TODO out of cash
 # TODO save or load user
 import sys
 import os
