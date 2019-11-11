@@ -1,6 +1,5 @@
 import os
 
-
 class Player(object):
     def __init__(self):
         self.hand = []
@@ -9,7 +8,7 @@ class Player(object):
             '6': 6, '7': 7, '8': 8, '9': 9,
             '10': 10,  'j': 10,
             'q': 10, 'k': 10,
-            'aceLow': 1, 'aceHigh': 10
+            'aceLow': 1, 'aceHigh': 11
             }
 
     def add_card(self, card):
@@ -73,9 +72,19 @@ class User(Player):
         filename = "{}.txt".format(username)
         return os.path.isfile(filename)
 
-    def load_user(self):
-        pass
+   # def is_user_in_db(self, username)
 
+    def load_user(self, username):
+        """
+        load user if exists
+        if not exists try again
+            or
+            ask about creating new user
+
+        query = "SELECT * FROM {} WHERE username = {}" # add "" or ''
+
+        """
+        pass
     @classmethod
     def choose_player(cls, username):
         if cls.is_user(username):

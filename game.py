@@ -2,15 +2,17 @@
 import sys
 import os
 
-dirr = os.path.dirname(os.path.realpath(__file__))
-dir_path = "{}/players".format(dirr)
-sys.path.append(dir_path)
+dir1 = os.path.dirname(os.path.realpath(__file__))
+dir_players = "{}/players".format(dir1)
+dir_models = "{}/models".format(dir1)
+sys.path.append(dir_players)
+sys.path.append(dir_models)
 
 from shutil import get_terminal_size
 
 import UI as ui
 import player.players as players
-from deck import Deck
+from models.deck import Deck
 
 def game():
     ui.welcome()
@@ -52,6 +54,7 @@ def game():
             if user.count_points() > 21:
                 ui.bust()
                 continue
+
             print("\n" * get_terminal_size().lines, end='')
             dealer.dealer_turn(deck.get_card())
             dealer_cards_visibility = True
@@ -59,7 +62,7 @@ def game():
             if user.count_points() == dealer.count_points():
                 ui.draw()
                 user.cash += user.bet
-            elif user.count_points() > dealer.count_points() and dealer.count_points <= 21:
+            elif user.count_points() > dealer.count_points() and dealer.count_points() <= 21:
                 ui.won_hand()
                 user.cash += user.bet*2
             else:
