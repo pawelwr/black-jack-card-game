@@ -3,7 +3,8 @@ from random import shuffle
 class Deck:
     def __init__(self):
         self.cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k', 'a']
-        self.deck = self.shuffle_deck(self.cards, 2)
+        self.deck = []
+        self.shuffle_deck(self.cards, 2)
 
     def shuffle_deck(self, cards, number_of_decks):
         """
@@ -16,7 +17,7 @@ class Deck:
             for k in cards:
                 deck_of_cards.append(k)
                 shuffle(deck_of_cards)
-        return deck_of_cards
+        self.deck = deck_of_cards
 
     def get_card(self):
         #giving card for player and removing from desk
