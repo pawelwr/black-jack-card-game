@@ -50,8 +50,9 @@ def test_count_points():
     assert game.points == {"cp": 13, "p1": 13}
 
 def test_computer_turn():
-    game = Game()
-    game.first_deal()
-    game.computer_turn()
-    del game.hands["cp"][-1]
-    assert int(game.points["cp"]) > 17
+    for i in range(50):
+        game = Game()
+        game.first_deal()
+        game.computer_turn()
+        del game.hands["cp"][-1]
+        assert int(game.points["cp"]) >= 17

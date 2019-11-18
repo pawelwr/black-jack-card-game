@@ -36,10 +36,9 @@ class Game(Deck):
         return
 
     def count_points(self):
-        points_dict = {"cp": 0, "p1": 0}
         for k, v in self.hands.items():
             points = 0
-            for c in sorted(v):
+            for c in v:
                 if c == "a":
                     if points > 10:
                         points += self.cards_values["aceLow"]
@@ -53,7 +52,7 @@ class Game(Deck):
         return self.points
 
     def add_card(self, player):
-        self.hands[player].append(self.get_card)
+        self.hands[player].append(self.get_card())
         return self.hands[player]
 
     def computer_turn(self):
