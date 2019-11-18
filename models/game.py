@@ -1,7 +1,10 @@
 from deck import Deck
 
 class Game(Deck):
-    players_symbols = ("cp", "p1", "p2", "p3", "p4", "p5", "p6")
+    """
+    cp = computer players
+    p1 = human player
+    """
     cards_values = {
             '2': 2, '3': 3, '4': 4, '5': 5,
             '6': 6, '7': 7, '8': 8, '9': 9,
@@ -13,18 +16,9 @@ class Game(Deck):
     def __init__(self, players = 2):
         Deck.__init__(self)
         self.players = players
-        self.hands = self.make_hand_dictionary()
-        self.points = {}
+        self.hands = {"cp": [], "p1": []}
+        self.points = {"cp": 0, "p1": 0}
         self.bet = 0
-
-    def make_hand_dictionary(self):
-        d = {}
-        i = 0
-        for p in self.players_symbols:
-            d.setdefault(p, [])
-            i += 1
-            if i == self.players: break
-        return d
 
     def first_deal(self):
         for c in range(2):
@@ -38,8 +32,11 @@ class Game(Deck):
     def get_hands(self):
         return self.hands
 
+    def get_game_state(self):
+        return
+
     def count_points(self):
-        points_dict = self.make_hand_dictionary()
+        points_dict = {"cp": 0, "p1": 0}
         for k, v in self.hands.items():
             points = 0
             for c in sorted(v):
@@ -50,5 +47,16 @@ class Game(Deck):
                         points += self.cards_values["aceHigh"]
                 else:
                     points += self.cards_values[c]
-            points_dict[k] = points
-        return points_dict
+            self.points[k] = points
+
+    def get_points(self):
+        return self.points
+
+    def add_card(self, player):
+        self.hands[player].append(self.get_card)
+        return self.hands[player]
+
+    def computer_turn(self):
+        while self.points["cp"] < 17:
+            self.add_card("cp")
+            self.count_points()

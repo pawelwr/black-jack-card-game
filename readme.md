@@ -1,4 +1,4 @@
-Black Jack concole card game in Python.
+Black Jack console card game in Python.
 Run game.py file to play.
 
 To do:

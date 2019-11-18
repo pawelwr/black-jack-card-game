@@ -67,6 +67,7 @@ class User(Player):
 
     def get_cash(self):
         return self.cash
+        
     @classmethod
     def is_user(cls, username):
         filename = "{}.txt".format(username)
