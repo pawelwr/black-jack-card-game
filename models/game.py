@@ -1,3 +1,5 @@
+import sqlite3
+
 from deck import Deck
 
 class Game(Deck):
@@ -59,3 +61,13 @@ class Game(Deck):
         while self.points["cp"] < 17:
             self.add_card("cp")
             self.count_points()
+
+    def load_user(self, username):
+        conn = sqlite3.connect('bj.db')
+        c = conn.cursor()
+        query = "SELECT FROM users WHERE username={}".format(username)
+        try:
+            c.execute(query)
+        except:
+            
+            
