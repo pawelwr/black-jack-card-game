@@ -1,25 +1,22 @@
-import mysql.connector
+import sqlite3
+conn = sqlite3.connect('bj.db')
 
-config = {'user': 'pawelwr5', 'password': '20python19',
-        'host': 'pawelwr5.mysql.eu.pythonanywhere-services.com',
-        'database': 'pawelwr5$blackjack'}
+c = conn.cursor()
 
-cnx = mysql.connector.connect(**config)
-cursor = cnx.cursor()
+c.execute("""CREATE TABLE IF NOT EXISTS test
+            (rowid NOT NULL,
+            username varchar unique, 
+            account_status int,
+            played_games int, 
+            won_games int)""")
 
-query = """CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY,
-        username char(20), account_status int, played_games int,
-        won_games int);
-        """
+c.execute("""CREATE TABLE IF NOT EXISTS played_games
+            (winner int,
+            bet int,
+            computer_points int,
+            user_points int,
+            FOREIGN KEY (winner)
+            REFERENCES test (rowid))""")
 
-cursor.execute(query)
-
-query = """CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY,
-        winner_id int, bet int,
-        FOREIGN KEY (winner_id) REFERENCES users (id)
-        );
-        """
-
-cursor.execute(query)
-
-cnx.close()
+conn.commit()
+conn.close()
