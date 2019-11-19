@@ -20,6 +20,16 @@ class Player:
             return True
         return False
 
+    def new_user(self, username):
+        if self.is_user(username):
+            return {"message": "User allready exist"}
+        conn = sqlite3.connect('bj.db')
+        c = conn.cursor()
+        query = "INSERT INTO users VALUES ({}, {}. {}. {})".format(
+            self.name, self.account, self.played_games, self.won_games)
+        c.execute(query)
+        return {"message": "User has been created succesfully"}
+
     @classmethod
     def load_user(cls, username):
         conn = sqlite3.connect('bj.db')
@@ -27,13 +37,13 @@ class Player:
         query = "SELECT FROM users WHERE username='{}'".format(username)
         c.execute(query)
         return c.fetchone()
-        
-    def save_user(self):
-        conn = sqlite3.connect('bj.db')
-        c = conn.cursor()
-        query = """UPDATE users
-        account = '{}'
-        played_games = '{}'
-        won_games = '{}'
-        WHERE username = '{}'
-        """.format(#############)
+
+    # def save_user(self):
+    #     conn = sqlite3.connect('bj.db')
+    #     c = conn.cursor()
+    #     query = """UPDATE users
+    #     account = '{}'
+    #     played_games = '{}'
+    #     won_games = '{}'
+    #     WHERE username = '{}'
+    #     """.format(#############)
