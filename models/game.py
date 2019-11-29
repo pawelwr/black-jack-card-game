@@ -2,6 +2,7 @@ import sqlite3
 
 from deck import Deck
 
+
 class Game(Deck):
     """
     cp = computer players
@@ -15,7 +16,7 @@ class Game(Deck):
             'aceLow': 1, 'aceHigh': 11
             }
 
-    def __init__(self, players = 2):
+    def __init__(self, players=2):
         Deck.__init__(self)
         self.players = players
         self.hands = {"cp": [], "p1": []}
@@ -66,8 +67,4 @@ class Game(Deck):
         conn = sqlite3.connect('bj.db')
         c = conn.cursor()
         query = "SELECT FROM users WHERE username={}".format(username)
-        try:
-            c.execute(query)
-        except:
-            
-            
+        c.execute(query)

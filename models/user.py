@@ -1,7 +1,8 @@
 import sqlite3
 
+
 class Player:
-    def __init__(self, id, name, account = 5000, played_games = 0, won_games = 0):
+    def __init__(self, id, name, account=5000, played_games=0, won_games=0):
         self.id = 0
         self.name = name
         self.account = 5000
