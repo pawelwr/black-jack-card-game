@@ -6,8 +6,8 @@ class Game(db.Model):
     cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k', 'a']
     id = db.Column(db.Integer, primary_key=True)
     deck = db.Column(db.String(32))
-    pc_cards = ""
-    p1_cards = ""
+    pc_cards = []
+    p1_cards = []
     cards_values = {
         '2': 2, '3': 3, '4': 4, '5': 5,
         '6': 6, '7': 7, '8': 8, '9': 9,
@@ -25,31 +25,31 @@ class Game(db.Model):
         Return: deck of shuffled cards
         TODO: for more than one deck
         """
-        deck_of_cards = []
+        deck = []
         for i in range(number_of_decks * 4):
             for k in cards:
-                deck_of_cards.append(k)
+                deck.append(k)
                 shuffle(deck_of_cards)
-        deck = ",".join(deck_of_cards)
         return deck
 
+    def add_card(self, hand):
+        return self.deck.pop(0)
+
+
     def first_deal(self):
-        self.pc_cards = ""
-        self.p1_cards = ""
+        self.pc_cards = []
+        self.p1_cards = []
         for c in range(2):
-            self.pc_cards += self.deck[0]
-            self.deck = self.deck[2:]
-            self.p1_cards += self.deck[0]
-            self.deck = self.deck[2:]
+            self.pc_cards += get_card()
 
     def get_hands(self):
         hands = {"pc": self.pc_cards, "p1": self.p1_cards}
         return hands
 
     def count_points(self, hand):
+        points = 0
         for c in hand:
-            points = 0
-            if c == ",": continue
+            # if c == ",": continue
             if c == "a":
                 if points > 10:
                     points += self.cards_values["aceLow"]
