@@ -34,8 +34,26 @@ def get_card():
     game.user_get_card()
     db.session.add(game)
     db.session.commit()
+
     hands = game.get_hands()
     p1_points = game.count_points(hands["p1"])
     return render_template(
         'start_game.html', deck=game.deck,
         p1_cards=hands["p1"].split(','), p1_points=p1_points)
+
+
+@app.route('/stay')
+def computer_turn():
+    game = Game.query.get(1)
+    print('pc cards: ', game.pc_cards)
+    game.computer_turn()
+    db.session.add(game)
+    db.session.commit()
+    hands = game.get_hands()
+    p1_points = game.count_points(hands["p1"])
+    pc_points = game.count_points(hands["pc"])
+    return render_template(
+        'computer_turn.html', p1_cards=hands["p1"].split(','),
+        p1_points=p1_points, pc_cards=hands["pc"].split(','),
+        pc_points=pc_points
+    )
