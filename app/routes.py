@@ -39,7 +39,13 @@ def get_card():
 
     hands = game.get_hands()
     p1_points = game.count_points(hands["p1"])
-
+    if p1_points > 21:
+        pc_points = game.count_points(hands["pc"])
+        return render_template(
+            'bust.html', p1_cards=hands["p1"].split(','),
+            p1_points=p1_points, pc_cards=hands["pc"].split(','),
+            pc_points=pc_points
+        )
     return render_template(
         'start_game.html', deck=game.deck,
         p1_cards=hands["p1"].split(','), p1_points=p1_points)
