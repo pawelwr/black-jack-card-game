@@ -14,7 +14,7 @@ def start_game():
     game = Game()
     game.first_deal()
     hands = game.get_hands()
-    print(hands)
     p1_points = game.count_points(hands["p1"])
-    return render_template('start_game.html', deck=game.deck,
-                    p1_cards=list(hands["p1"]), p1_points=p1_points)
+    return render_template(
+        'start_game.html', deck=game.deck,
+        p1_cards=list(hands["p1"]), p1_points=p1_points)

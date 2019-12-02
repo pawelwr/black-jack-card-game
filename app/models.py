@@ -5,7 +5,7 @@ from random import shuffle
 class Game(db.Model):
     cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k', 'a']
     id = db.Column(db.Integer, primary_key=True)
-    deck = db.Column(db.String(32))
+    deck = []
     pc_cards = []
     p1_cards = []
     cards_values = {
@@ -29,18 +29,19 @@ class Game(db.Model):
         for i in range(number_of_decks * 4):
             for k in cards:
                 deck.append(k)
-                shuffle(deck_of_cards)
+                shuffle(deck)
         return deck
 
-    def add_card(self, hand):
-        return self.deck.pop(0)
-
+    def get_card(self):
+        card = self.deck.pop(0)
+        return card
 
     def first_deal(self):
         self.pc_cards = []
         self.p1_cards = []
         for c in range(2):
-            self.pc_cards += get_card()
+            self.pc_cards.append(self.get_card())
+            self.p1_cards.append(self.get_card())
 
     def get_hands(self):
         hands = {"pc": self.pc_cards, "p1": self.p1_cards}
