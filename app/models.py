@@ -8,6 +8,7 @@ class Game(db.Model):
     deck = db.Column(db.String)
     pc_cards = db.Column(db.String(20))
     p1_cards = db.Column(db.String(20))
+    bet = db.Column(db.Integer)
     cards_values = {
         '2': 2, '3': 3, '4': 4, '5': 5,
         '6': 6, '7': 7, '8': 8, '9': 9,
