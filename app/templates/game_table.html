@@ -1,0 +1,17 @@
+
+
+<div>
+    <p>Your cards: {{ p1_cards }}</p>
+    <p>Your points: {{ p1_points }}</p>
+</div>
+<div>
+    <p>Computer cards: {{ pc_cards }}</p>
+    {% if show == True %}
+      <p>Computer points: {{ pc_points }}</p>
+    {% endif %}
+</div>
+
+
+<button type="button", formmethod="GET", onclick="location.href='/get_card'">Get card</button>
+<button type="button", formmethod="GET", onclick="location.href='/stay'">Stay</button>
+<button type="button", formmethod="GET", onclick="location.href='/start_game'">New game</button>

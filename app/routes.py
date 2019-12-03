@@ -25,9 +25,13 @@ def start_game():
     hands = game.get_hands()
     p1_points = game.count_points(hands["p1"])
 
+    pc_cards_list = hands["pc"].split(',')
+    pc_cards_invisible = [pc_cards_list[0], '#']
+
     return render_template(
-        'start_game.html', deck=game.deck,
-        p1_cards=hands["p1"].split(','), p1_points=p1_points)
+        'game_table.html', deck=game.deck,
+        p1_cards=hands["p1"].split(','), p1_points=p1_points,
+        pc_cards=pc_cards_invisible)
 
 
 @app.route('/get_card')
@@ -61,6 +65,9 @@ def computer_turn():
     hands = game.get_hands()
     p1_points = game.count_points(hands["p1"])
     pc_points = game.count_points(hands["pc"])
+
+
+
     return render_template(
         'computer_turn.html', p1_cards=hands["p1"].split(','),
         p1_points=p1_points, pc_cards=hands["pc"].split(','),
