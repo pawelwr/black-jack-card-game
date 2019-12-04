@@ -43,6 +43,7 @@ def get_card():
 
     hands = game.get_hands()
     p1_points = game.count_points(hands["p1"])
+
     if p1_points > 21:
         pc_points = game.count_points(hands["pc"])
         return render_template(
@@ -50,10 +51,15 @@ def get_card():
             p1_points=p1_points, pc_cards=hands["pc"].split(','),
             pc_points=pc_points
         )
-    return render_template(
-        'start_game.html', deck=game.deck,
-        p1_cards=hands["p1"].split(','), p1_points=p1_points)
 
+    pc_cards_list = hands["pc"].split(',')
+    pc_cards_invisible = [pc_cards_list[0], '#']
+
+    return render_template(
+                'game_table.html', deck=game.deck,
+                p1_cards=hands["p1"].split(','), p1_points=p1_points,
+                pc_cards=pc_cards_invisible
+                )
 
 @app.route('/stay')
 def computer_turn():
@@ -66,10 +72,18 @@ def computer_turn():
     p1_points = game.count_points(hands["p1"])
     pc_points = game.count_points(hands["pc"])
 
+    if p1_points > pc_points or pc_points > 21:
+        winner = "p1"
+    elif p1_points == pc_points:
+        winner = "draw"
+    else:
+        winner = "pc"
 
+    messages = {"p1": "You win!", "draw": "Draw", "pc": "Computer win!"}
 
     return render_template(
-        'computer_turn.html', p1_cards=hands["p1"].split(','),
-        p1_points=p1_points, pc_cards=hands["pc"].split(','),
-        pc_points=pc_points
-    )
+        'game_table.html', deck=game.deck,
+        p1_cards=hands["p1"].split(','), p1_points=p1_points,
+        pc_cards=hands["pc"].split(','), pc_points=pc_points,
+        message=messages[winner], show=True
+        )
