@@ -1,7 +1,7 @@
 from flask import render_template, url_for
 from app import app, db
 from app.models import Game
-
+from app.game_methods import GameMethods
 
 @app.route('/')
 @app.route('/index')
@@ -16,7 +16,7 @@ def start_game():
         db.session.delete(r)
     db.session.commit()
 
-    game = Game()
+    game = GameMethods()
     game.shuffle_deck()
     game.first_deal()
     db.session.add(game)
@@ -36,7 +36,7 @@ def start_game():
 
 @app.route('/get_card')
 def get_card():
-    game = Game.query.get(1)
+    game = GameMethods.query.get(1)
     game.user_get_card()
     db.session.add(game)
     db.session.commit()
@@ -63,7 +63,7 @@ def get_card():
 
 @app.route('/stay')
 def computer_turn():
-    game = Game.query.get(1)
+    game = GameMethods.query.get(1)
     game.computer_turn()
     db.session.add(game)
     db.session.commit()
