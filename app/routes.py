@@ -87,3 +87,7 @@ def computer_turn():
         pc_cards=hands["pc"].split(','), pc_points=pc_points,
         message=messages[winner], show=True
         )
+
+@app.route('/login')
+def login():
+    
